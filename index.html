@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Google Drive Audio Player (Static)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title" id="title">Google Drive Audio Player</h1>
+      <p class="sub" id="sub">このページは <code>audio.json</code> のURLリストを読み込んで音声を再生します（ビルド不要・完全静的）。</p>
+
+      <div class="card" style="margin-bottom:16px">
+        <div class="flex">
+          <input class="input" id="search" placeholder="タイトルで検索" />
+          <button class="btn right" id="reload">再読み込み</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">🎧 Player</h2>
+          <div class="small" style="margin-bottom:6px;word-break:break-all"><b>Now Playing:</b> <span id="now"></span></div>
+          <audio id="player" controls style="width:100%;margin-bottom:8px"></audio>
+          <div class="flex">
+            <label class="small">速度&nbsp;
+              <select id="rate">
+                <option>0.5</option><option>0.75</option><option selected>1</option><option>1.25</option><option>1.5</option><option>1.75</option><option>2</option>
+              </select>
+            </label>
+            <button class="btn" onclick="const a=document.getElementById('player');a.currentTime=Math.max(0,a.currentTime-10)">⏪ -10s</button>
+            <button class="btn" onclick="const a=document.getElementById('player');a.currentTime=a.currentTime+10">+10s ⏩</button>
+            <label class="small right"><input type="checkbox" id="loop" /> ループ</label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">📚 Audio List</h3>
+          <div id="list" class="list"></div>
+          <div class="small" style="margin-top:8px">
+            🔧 追加したいときは <code>audio.json</code> を編集して、Driveリンク（またはID）を追記してください。
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
